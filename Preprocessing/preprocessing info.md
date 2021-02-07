@@ -8,3 +8,6 @@ Crop BMODE image boundaries such that the scales are removed and translations ca
     - Top Right: 668, 56
     - Bottom Left: 96, 674
     - Bottom Right: 668, 674
+### IO
+- Input: Folder of BMODE images
+- Output: Pairs and conditional on boolean, extra translated pairs into organized folder
