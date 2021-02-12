@@ -1,4 +1,4 @@
 function uploadData() {
     // non-functional stub
-   alert("Upload Data");
+   alert("Stub: Backend database needs to accept uploaded file!");
 }
