@@ -102,3 +102,39 @@ body {
 .main {
   padding-left: 1%;
 }
+
+.table {
+  text-align: -webkit-center;
+  margin-top: 60px;
+  margin-bottom: 30px;
+}
+
+thead {
+  border: 1px #ddd;
+}
+
+td, th {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+tr:nth-child(even){
+  background-color: #f2f2f2de;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: rgb(105, 140, 236);
+  color: white;
+}
+
+ .resultsTable {
+  border: 2px solid #ddd;
+  text-align: center;
+ }
