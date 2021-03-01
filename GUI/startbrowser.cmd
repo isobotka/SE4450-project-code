@@ -1,0 +1,3 @@
+cd "C:\Program Files (x86)\Google\Chrome\Application\"
+chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
+echo "Please remember to open http://localhost:8080/index.html"
