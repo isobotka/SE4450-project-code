@@ -124,7 +124,7 @@ h6, .h6 {
   font-size: 1rem;
 }
 
-p {
+a, p {
   text-align: justify;
   text-justify: inter-word;
   font-family: Calibri, sans-serif;

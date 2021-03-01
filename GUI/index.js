@@ -19,7 +19,7 @@ function uploadData() {
 			console.log(data.path)
 		})
 		.catch(error => {
-			alert('Error ' + error)
+			alert('ERROR: ' + error)
 			console.error(error)
 		})
 }
