@@ -25,26 +25,32 @@ function uploadData() {
 
 }
 
-var output = [(2,8,0.9),(3,10,0.84),(3,15,0.8),(4,15,0.73),(6,21,0.66)];
+window.onload = function() {
 
-// function displayResults(output) {
-// 	var results = document.getElementById('results');
-// 	var tableBody = document.createElement('tbody');
+	var output = [[2,8,0.9],[3,10,0.84],[3,15,0.8],[4,15,0.73],[6,21,0.66]];
 
-// 	output.forEach(function(rowData) {
-// 		var row = document.createElement('tr');
+	//Rank 1
+	document.getElementById("r1f1").innerHTML = output[0][0];
+	document.getElementById("r1f2").innerHTML = output[0][1];
+	document.getElementById("r1p").innerHTML = output[0][2];
 
-// 		rowData.forEach(function(cellData) {
-// 			var cell = document.createElement('td');
-// 			cell.appendChild(document.createTextNode(cellData));
-// 			row.appendChild(cell);
-// 		});
-		
-// 		tableBody.appendChild(row);
-// 	});
+	//Rank 2
+	document.getElementById("r2f1").innerHTML = output[1][0];
+	document.getElementById("r2f2").innerHTML = output[1][1];
+	document.getElementById("r2p").innerHTML = output[1][2];
 
-// 		results.appendChild(tableBody);
-// 		document.tableBody.appendChild(results);
-// 	}
+	//Rank 3
+	document.getElementById("r3f1").innerHTML = output[2][0];
+	document.getElementById("r3f2").innerHTML = output[2][1];
+	document.getElementById("r3p").innerHTML = output[2][2];
 
-// 	displayResults([["row1, rank", "row1, frame1", "row1, frame2", "row1, probability"], ["row2, rank", "row2, frame1", "row2, frame2", "row2, probability"]]);
+	//Rank 4
+	document.getElementById("r4f1").innerHTML = output[3][0];
+	document.getElementById("r4f2").innerHTML = output[3][1];
+	document.getElementById("r4p").innerHTML = output[3][2];
+
+	//Rank 5
+	document.getElementById("r5f1").innerHTML = output[4][0];
+	document.getElementById("r5f2").innerHTML = output[4][1];
+	document.getElementById("r5p").innerHTML = output[4][2];
+};

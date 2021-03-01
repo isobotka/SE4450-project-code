@@ -49,7 +49,8 @@
   text-align: left;
   align-content: center;
   width: calc("100vh - 2px");
-  background-color: rgba(83, 89, 95, 0.9);
+  background-color: rgb(122 124 125 / 85%);
+  box-shadow: 0px 10px 12px #00000040;
 }
 
 a:link {
@@ -63,7 +64,7 @@ body {
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
-  background-color: #fff;
+  background-color: #a8c6fdad;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -74,7 +75,6 @@ body {
   align-self: left;
   display: inline-block;
   width: 40vw;
-  color: rgb(105, 140, 236);
   text-align: left;
   margin-left: 20px;
 }
@@ -85,7 +85,7 @@ body {
   font-size: 1.7em;
   border-bottom: none;
   transition: all 0.2s ease-in-out;
-  color: rgb(105, 140, 236);
+  color: rgb(45, 84, 211);
   font-weight: 700;
   letter-spacing: 3px;
 }
@@ -93,7 +93,7 @@ body {
 .headerRight {
   text-align: right;
   margin: auto;
-  margin-right: 20px;
+  margin-right: 24px;
   align-self: right;
   display: inline-block;
   width: 40vw;
@@ -110,16 +110,20 @@ body {
 }
 
 thead {
-  border: 1px #ddd;
+
 }
 
 td, th {
-  border: 1px solid #ddd;
+  border: 1px solid #212529;
   padding: 10px;
 }
 
 tr:nth-child(even){
   background-color: #f2f2f2de;
+}
+
+tr:nth-child(odd){
+  background-color: white;
 }
 
 tr:hover {
@@ -130,11 +134,12 @@ th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
-  background-color: rgb(105, 140, 236);
+  background-color: rgb(45, 84, 211);
   color: white;
 }
 
  .resultsTable {
-  border: 2px solid #ddd;
+  border: 2px solid #212529;
   text-align: center;
+  width: 50%;
  }
