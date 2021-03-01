@@ -38,11 +38,17 @@
             <button onclick="uploadData()">Upload Data</button>
         -->
 
-        <form id="uploadbanner" enctype="multipart/form-data" method="post" action="#">
-            <h4>Select a File to Upload for Analysis:</h4>
-            <input id="uploadedFile" name="myfile" type="file" />
-            <input type="submit" value="Upload File" id="submit" onclick="uploadData()"/>
-        </form>
+        <!--
+            <form id="uploadbanner" enctype="multipart/form-data" method="post" action="#">
+                <h4>Select a File to Upload for Analysis:</h4>
+                <input id="uploadedFile" name="myfile" type="file" />
+                <input type="submit" value="Upload File" id="submit" onclick="uploadData()"/>
+            </form>
+        -->
+        
+        <h4>Select a File to Upload for Analysis:</h4>
+        <input id="uploadedFile" name="myfile" type="file" />
+        <button id='uploadButton' onclick="uploadData()">Upload File</button>
 
         </div>
 
