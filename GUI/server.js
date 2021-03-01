@@ -13,6 +13,7 @@ http.createServer(function (req, res) {
 
             if (files && files.myFile) {
                 var oldpath = files.myFile.path;
+                // var newpath = __dirname + '\\' + 'some relative path';
                 var newpath = __dirname + '\\' + files.myFile.name;
 
                 fs.rename(oldpath, newpath, function (error) {
