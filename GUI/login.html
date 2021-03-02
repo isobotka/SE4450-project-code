@@ -1,0 +1,75 @@
+<head>
+  <title>Capstone</title>
+
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="./bootstrap/css/bootstrap-reboot.min.css"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="./bootstrap/css/bootstrap-grid.min.css"
+  />
+  <link
+    rel="stylesheet"
+    type="text/css"
+    href="./bootstrap/css/bootstrap.min.css"
+  />
+
+  <link rel="stylesheet" type="text/css" href="style.css" />
+  <link rel="stylesheet" type="text/css" href="login.css" />
+
+  <script src="login.js"></script>
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .visually-hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <main class="form-signin">
+    <div class="text-center">
+      <!-- <form> -->
+      <h1 class="h3 mb-3 fw-normal">U.E.F.I 2.0</h1>
+      <label for="loginId" class="visually-hidden">Login ID</label>
+      <input
+        type="text"
+        id="loginId"
+        class="form-control"
+        placeholder="Login ID"
+        required
+        autofocus
+      />
+      <label for="password" class="visually-hidden">Password</label>
+      <input
+        type="password"
+        id="password"
+        class="form-control"
+        placeholder="Password"
+        required
+      />
+      <span></span>
+      <button class="w-100 btn btn-lg btn-primary" onclick="login()">
+        Login
+      </button>
+
+      <span id="loginStatus"></span>
+      <!-- </form> -->
+    </div>
+  </main>
+</body>

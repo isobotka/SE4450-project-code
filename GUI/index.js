@@ -14,7 +14,7 @@ function uploadData() {
 	})
 		.then(response => response.json())
 		.then(data => {
-			alert('File is uploaded successfully and is saved under ' + data.path)
+			alert('File saved under: ' + data.path)
 
 			console.log(data.path)
 		})
