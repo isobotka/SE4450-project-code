@@ -7,7 +7,6 @@ function uploadData() {
 	const formData = new FormData()
 	formData.append('myFile', files[0])
 
-
 	fetch('http://localhost:8080/upload', {
 		method: 'POST',
 		body: formData
@@ -25,7 +24,35 @@ function uploadData() {
 
 }
 
+function logout() {
+	fetch("http://localhost:8080/logout", {
+		method: "POST",
+	})
+		.then((response) => response.json())
+		.then((data) => {
+		if (data.status == "success") window.location = "http://localhost:8080";
+
+		console.log(data.path);
+		})
+		.catch((error) => {
+		alert("ERROR: " + error);
+		console.error(error);
+		});
+}
+
 window.onload = function() {
+	fetch("http://localhost:8080/getUser", {
+	  method: "POST",
+	})
+	  .then((response) => response.json())
+	  .then((data) => {
+		var loginId = document.getElementById("loginId");
+		if (loginId) loginId.innerHTML = data.loginId;
+	  })
+	  .catch((error) => {
+		alert("ERROR: " + error);
+		console.error(error);
+	  });
 
 	var output = [[2,8,0.9],[3,10,0.84],[3,15,0.8],[4,15,0.73],[6,21,0.66]];
 
