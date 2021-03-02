@@ -123,5 +123,5 @@ app.use(express.static(__dirname));
 // app.use("/api", router);
 
 app.listen(PORT, function () {
-  console.log("Express server listening on port ", PORT); // eslint-disable-line
+  console.log("Server listening on port ", PORT); // eslint-disable-line
 });

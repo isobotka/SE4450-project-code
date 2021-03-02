@@ -21,7 +21,6 @@ function uploadData() {
 			alert('ERROR: ' + error)
 			console.error(error)
 		})
-
 }
 
 function logout() {
