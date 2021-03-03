@@ -46,7 +46,7 @@ def formatOutput(processed,predictions):
     for x in range(len(predictions)):
         #add frame 1, frame 2 and probability of being a good pair to output
         output.append({'frame1':processed[x][0],'frame2':processed[x][1],'percent':round(float(predictions[x][1][0]),3)})
-    output.sort(key=lambda a: a[2],reverse=True) #sort output to find best pairs
+    output.sort(key=lambda a: a['percent'],reverse=True) #sort output to find best pairs
     for x in range(len(output)):
         output[x] = json.dumps(output[x]) #convert output to .json objects
     return output
