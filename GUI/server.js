@@ -108,7 +108,7 @@ app.post("/upload", function (req, res) {
         var pythonResult;
         // spawn new child process to call the python script
         const python = spawn(
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python37_64\\python",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python36_64\\python",
           ["script.py"]
         );
         // collect data from script
