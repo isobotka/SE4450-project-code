@@ -80,3 +80,8 @@ window.onload = function() {
 	document.getElementById("r5f2").innerHTML = output[4][1];
 	document.getElementById("r5p").innerHTML = output[4][2];
 };
+
+// JQuery to display the table
+$(document).ready(function () {
+    $("#results").DataTable();
+  });

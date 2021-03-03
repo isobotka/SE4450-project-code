@@ -1,20 +1,19 @@
 <DOCTYPE !html>
-
 <html>
-
     <head>
         <title>Capstone</title>
-        <script src='index.js'></script>
-
-        <link rel="stylesheet" type="text/css" href="index.css">
-
+        <!-- JQuery and datatable links should be in this order due to dependency. They have to run first index.js-->
+        <script src="jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="dataTables.min.css" />
+        <script src="dataTables.min.js"></script>
+  
+        <link rel="stylesheet" type="text/css" href="./index.css" />
+        <script src="index.js"></script>
     </head>
 
     <div class="headerTitle">
         <div class="menuName">
-            <a>
-                <a href= "index.html">U.E.F.I 2.0</a>
-            </a>
+            <a href= "index.html">U.E.F.I 2.0</a>
         </div>
     
         <div class="titleContainer">
@@ -113,5 +112,4 @@
             </table>
         </div>
     </body>
-
 </html>
