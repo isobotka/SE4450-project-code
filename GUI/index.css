@@ -27,9 +27,16 @@
   --bs-danger: #dc3545;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
-  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --bs-gradient: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0)
+  );
 }
 
 *,
@@ -101,6 +108,7 @@ body {
 
 .main {
   padding-left: 1%;
+  text-align: center;
 }
 
 .table {
@@ -110,19 +118,19 @@ body {
 }
 
 thead {
-
 }
 
-td, th {
+td,
+th {
   border: 1px solid #212529;
   padding: 10px;
 }
 
-tr:nth-child(even){
+tr:nth-child(even) {
   background-color: #f2f2f2de;
 }
 
-tr:nth-child(odd){
+tr:nth-child(odd) {
   background-color: white;
 }
 
@@ -138,8 +146,26 @@ th {
   color: white;
 }
 
- .resultsTable {
+.resultsTable {
   border: 2px solid #212529;
   text-align: center;
   width: 50%;
- }
+}
+
+nav {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+div.main {
+  margin-bottom: 20px;
+}
+
+div.table {
+  width: 80% !important;
+  margin: auto !important;
+}
+
+#uploadButton {
+  margin-left: 10px;
+}
