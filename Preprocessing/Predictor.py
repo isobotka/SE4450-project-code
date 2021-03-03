@@ -7,6 +7,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
 import pathlib
+import json
 
 def preprocessData(data):
     height = data.shape[0] #get height of raw data
@@ -44,7 +45,7 @@ def formatOutput(processed,predictions):
     output = [] #list to hold output values
     for x in range(len(predictions)):
         #add frame 1, frame 2 and probability of being a good pair to output
-        output.append([processed[x][0],processed[x][1],predictions[x][1][0]])
+        output.append(json.dumps({'frame1':processed[x][0],'frame2':processed[x][1],'percent':str(predictions[x][1][0])[0:6]}))
     output.sort(key=lambda a: a[2],reverse=True) #sort output to find best pairs
     return output
 
