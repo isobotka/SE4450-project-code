@@ -73,8 +73,32 @@ function login(e) {
   }
 } */
 
+/*
 window.onload = function () {
   var loginStatus = document.getElementById("loginStatus");
 
   if (loginStatus) loginStatus.style.display = "none";
+};
+
+*/
+
+window.onload = function () {
+  var loginId = document.getElementById("loginId");
+  var password = document.getElementById("password");
+
+  var loginStatus = document.getElementById("loginStatus");
+
+  if (loginStatus) loginStatus.style.display = "none";
+
+  loginId.addEventListener("keyup", function (event) {
+    if (event.keyCode == 13) {
+      login();
+    }
+  });
+
+  password.addEventListener("keyup", function (event) {
+    if (event.keyCode == 13) {
+      login();
+    }
+  });
 };
