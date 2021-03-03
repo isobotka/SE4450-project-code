@@ -56,7 +56,10 @@ window.onload = function() {
 	  .then((response) => response.json())
 	  .then((data) => {
 		var loginId = document.getElementById("loginId");
-		if (loginId) loginId.innerHTML = data.loginId;
+
+		if (data && data.loginId) {
+		  if (loginId) loginId.innerHTML = data.loginId;
+		} else window.location = "http://localhost:8080";
 	  })
 	  .catch((error) => {
 		alert("ERROR: " + error);
