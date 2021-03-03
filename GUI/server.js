@@ -1,6 +1,7 @@
 const fileUpload = require("express-fileupload");
 const path = require("path");
 const bodyParser = require("body-parser");
+const { spawn } = require("child_process"); // for calling python script which generates a result
 
 const express = require("express");
 const app = express();
@@ -103,18 +104,33 @@ app.post("/upload", function (req, res) {
         if (err) {
             return res.status(500).send(err);
         }
-
-        // res.send("File uploaded to " + uploadPath);
-
-        res.writeHead(200, {
-            "Content-Type": "application/json",
-        });
-        res.end(
-            JSON.stringify({
-                status: "success",
-                path: uploadPath,
-            })
+        
+        var pythonResult;
+        // spawn new child process to call the python script
+        const python = spawn(
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python37_64\\python",
+          ["script.py"]
         );
+        // collect data from script
+        python.stdout.on("data", function (data) {
+          console.log("Pipe data from python script ..." + data);
+          pythonResult = data.toString();
+    
+          res.writeHead(200, {
+            "Content-Type": "application/json",
+          });
+          res.end(
+            JSON.stringify({
+              status: "success",
+              path: uploadPath,
+              result: pythonResult,
+            })
+          );
+        });
+        // in close event we are sure that stream from child process is closed
+        python.on("close", (code) => {
+          console.log(`child process close all stdio with code ${code}`);
+        });
     });
 });
 

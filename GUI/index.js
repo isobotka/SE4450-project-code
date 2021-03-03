@@ -1,8 +1,13 @@
 function uploadData() {
-
 	var fileUpload = document.getElementById('uploadedFile');
 
 	const files = fileUpload.files;
+
+	if (!files || files.length == 0) {
+	  alert("No file is selected. Please select a file for upload");
+  
+	  return;
+	}
 
 	const formData = new FormData();
 	formData.append('myFile', files[0]);
@@ -13,7 +18,12 @@ function uploadData() {
 	})
 	.then(response => response.json())
 	.then((data) => {
-		alert('File saved under: ' + data.path);
+		alert(
+		  "File is uploaded successfully and is saved under " +
+			data.path +
+			", python result: " +
+			data.result
+		);
 
 		console.log(data.path);
 	})
