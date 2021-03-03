@@ -1,0 +1,44 @@
+html,
+body {
+  height: 100%;
+  color: #212529 !important;
+  background-color: #a8c6fdad !important;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.menuName {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  align-self: left;
+  display: inline-block;
+  width: 40vw;
+  text-align: left;
+  margin-left: 20px;
+}
+
+.menuName a {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 1.7em;
+  border-bottom: none;
+  transition: all 0.2s ease-in-out;
+  color: rgb(45, 84, 211);
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+.headerRight {
+  text-align: right;
+  margin: auto;
+  margin-right: 24px;
+  align-self: right;
+  display: inline-block;
+  width: 40vw;
+}
