@@ -1,3 +1,7 @@
+const { response } = require("express");
+let pulledData;
+var globalfilename='P39-W2-S4.mat';
+
 function uploadData() {
 	var fileUpload = document.getElementById('uploadedFile');
 
@@ -20,11 +24,10 @@ function uploadData() {
 	.then((data) => {
 		alert(
 		  "File is uploaded successfully and is saved under " +
-			data.path +
-			", python result: " +
-			data.result
+			data.path 
 		);
-
+		globalfilename=files[0].name
+        console.log("The file name is "+globalfilename);
 		console.log(data.path);
 	})
 	.catch((error) => {
@@ -48,6 +51,79 @@ function logout() {
 		console.error(error);
 		});
 }
+
+function getml() {
+	fetch("http://localhost:8080/getml?"+ new URLSearchParams({
+		filenom: globalfilename,
+ }), {
+		method: "GET",
+	}).then(function(response){
+		return response.json();
+	}).then(function(json) {
+		let frames = json;
+		resettable(frames);
+	  }).catch(function(err) {
+		console.log('Fetch problem: ' + err.message);
+	  });
+
+		/*.then((response) => response.json())
+		.then((data => puylledData=data))
+		.catch((error) => {
+		alert("ERROR: " + error);
+		console.error(error);
+		console.log(pulledData);
+		});*/
+}
+
+function resettable(data)
+{
+	console.log(data.output);
+	console.log(data.output[1].frame1)
+	console.log(data.output[1].percent)
+	var resultdiv=document.createElement("div")
+    var newresultstable=document.createElement("table");
+	newresultstable.id='results'
+	var divContainer=document.getElementById('resulttable')
+	divContainer.innerHTML="";
+	divContainer.appendChild(newresultstable)
+	var array1=data
+	//Make the table head
+	let thead= newresultstable.createTHead();
+	let row = thead.insertRow();
+	let th1=document.createElement("th");
+	th1.style="width:30%"
+	let text1 = document.createTextNode("Rank")
+	th1.appendChild(text1);
+	row.appendChild(th1);
+	let th2=document.createElement("th");
+	th2.style="width:30%"
+	let text2 = document.createTextNode("Frame 1")
+	th2.appendChild(text2);
+	row.appendChild(th2);
+	let th3=document.createElement("th");
+	th3.style="width:30%"
+	let text3 = document.createTextNode("Frame 2")
+	th3.appendChild(text3);
+	row.appendChild(th3);
+	let th4=document.createElement("th");
+	th4.style="width:30%"
+	let text4 = document.createTextNode("Probability")
+	th4.appendChild(text4);
+	row.appendChild(th4);
+	//Make the rows
+	console.log(data.output.length)
+    for(var i=0 ; i < data.output.length; i++){
+		tr=newresultstable.insertRow(-1)
+		var cell1=tr.insertCell(-1)
+		cell1.innerHTML=i+1
+		for (key in data.output[i])
+		{
+			var cell=tr.insertCell(-1)
+			cell.innerHTML=data.output[i][key]
+		}
+	  }
+}
+
 
 window.onload = function() {
 	fetch("http://localhost:8080/getUser", {
