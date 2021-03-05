@@ -205,3 +205,8 @@ select,
 input {
   background-color: white !important;
 }
+
+#progress {
+  width: 50%;
+  margin: auto;
+}
