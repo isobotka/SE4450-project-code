@@ -1,7 +1,7 @@
 const { response } = require("express");
 let pulledData;
 var globalfilename='P39-W2-S4.mat';
-
+var globalframes;
 function uploadData() {
 	var fileUpload = document.getElementById("uploadedFile");
   
@@ -66,8 +66,8 @@ function uploadData() {
 	}).then(function(response){
 		return response.json();
 	}).then(function(json) {
-		let frames = json;
-		resettable(frames);
+		globalframes = json;
+		resettable(globalframes);
 	  }).catch(function(err) {
 		console.log('Fetch problem: ' + err.message);
 	  });
@@ -81,7 +81,31 @@ function uploadData() {
 		});*/
 }
 	  
-  
+function setTable(frames)
+{
+	//console.log(frames);
+	//console.log(globalframes);
+	$(document).ready(function() {
+		var table=$('#results').DataTable( {
+			data: globalframes,
+			columns: [
+				{ title: "Frame 1" },
+				{ title: "Frame 2" },
+				{ title: "Frame 3" }
+			]
+		} );
+
+       for(var i=0; i < globalframes.output.length; i++){
+        table.row.add([
+			i,
+			globalframes.output[i].frame1,
+			globalframes.output[i].frame2,
+			globalframes.output[i].percent
+		])
+	   }
+
+	} );
+}
 function resettable(data)
 {
 	console.log(data.output);
