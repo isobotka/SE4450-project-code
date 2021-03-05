@@ -62,6 +62,11 @@ function getml() {
 	var progressBar = document.getElementById("progressBar");
 
 	if (progressBar) progressBar.style.display = "block";
+	var existingt=document.getElementById("results")
+	if(existingt)
+   {
+	existingt.remove();
+   }
 
 	fetch("http://localhost:8080/getml?" + new URLSearchParams({
 		filenom: globalfilename,
