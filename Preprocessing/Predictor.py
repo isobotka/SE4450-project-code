@@ -47,8 +47,6 @@ def formatOutput(processed,predictions):
         #add frame 1, frame 2 and probability of being a good pair to output
         output.append({'frame1':processed[x][0],'frame2':processed[x][1],'percent':round(float(predictions[x][1][0]),3)})
     output.sort(key=lambda a: a['percent'],reverse=True) #sort output to find best pairs
-    for x in range(len(output)):
-        output[x] = json.dumps(output[x]) #convert output to .json objects
     return output
 
 def generatePairs(frames):
@@ -63,54 +61,51 @@ def generatePairs(frames):
 def get_model(width, height, depth):
 
     inputs = keras.Input((width, height, depth, 1))
+    
+    x = layers.Conv3D(filters=64, kernel_size=(3,3,2), activation="relu")(inputs) #Convolutional layer which is automatically trained to detect desired features
+    x = layers.MaxPool3D(pool_size=(2,2,1))(x) #Pooling layer which reduces the dimensionality of the RF data to allow for faster processing in further layers
+    x = layers.BatchNormalization()(x) #Normalizes the data post convolution and pooling to allow for faster training
 
-    x = layers.Conv3D(filters=64, kernel_size=(3,3,2), activation="relu")(inputs)
-    x = layers.MaxPool3D(pool_size=(2,2,1))(x)
-    x = layers.BatchNormalization()(x)
+    x = layers.Conv3D(filters=64, kernel_size=(3,3,1), activation="relu")(x) #Convolutional layer which is automatically trained to detect desired features
+    x = layers.MaxPool3D(pool_size=(2,2,1))(x) #Pooling layer which reduces the dimensionality of the RF data to allow for faster processing in further layers
+    x = layers.BatchNormalization()(x) #Normalizes the data post convolution and pooling to allow for faster training
 
-    x = layers.Conv3D(filters=64, kernel_size=(3,3,1), activation="relu")(x)
-    x = layers.MaxPool3D(pool_size=(2,2,1))(x)
-    x = layers.BatchNormalization()(x)
+    x = layers.Conv3D(filters=128, kernel_size=(3,3,1), activation="relu")(x) #Convolutional layer which is automatically trained to detect desired features
+    x = layers.MaxPool3D(pool_size=(2,2,1))(x) #Pooling layer which reduces the dimensionality of the RF data to allow for faster processing in further layers
+    x = layers.BatchNormalization()(x) #Normalizes the data post convolution and pooling to allow for faster training
 
-    x = layers.Conv3D(filters=128, kernel_size=(3,3,1), activation="relu")(x)
-    x = layers.MaxPool3D(pool_size=(2,2,1))(x)
-    x = layers.BatchNormalization()(x)
+    x = layers.Conv3D(filters=256, kernel_size=(3,3,1), activation="relu")(x) #Convolutional layer which is automatically trained to detect desired features
+    x = layers.MaxPool3D(pool_size=(2,2,1))(x) #Pooling layer which reduces the dimensionality of the RF data to allow for faster processing in further layers
+    x = layers.BatchNormalization()(x) #Normalizes the data post convolution and pooling to allow for faster training
 
-    x = layers.Conv3D(filters=256, kernel_size=(3,3,1), activation="relu")(x)
-    x = layers.MaxPool3D(pool_size=(2,2,1))(x)
-    x = layers.BatchNormalization()(x)
+    x = layers.Conv3D(filters=512, kernel_size=(3,3,1), activation="relu")(x) #Convolutional layer which is automatically trained to detect desired features
+    x = layers.MaxPool3D(pool_size=(2,2,1))(x) #Pooling layer which reduces the dimensionality of the RF data to allow for faster processing in further layers
+    x = layers.BatchNormalization()(x) #Normalizes the data post convolution and pooling to allow for faster training
 
-    x = layers.Conv3D(filters=512, kernel_size=(3,3,1), activation="relu")(x)
-    x = layers.MaxPool3D(pool_size=(2,2,1))(x)
-    x = layers.BatchNormalization()(x)
+    x = layers.GlobalAveragePooling3D()(x) #Calculates average output of each feature map in previous layers in preperation for final classification
+    x = layers.Dense(units=512, activation="relu")(x) #Neurons in layer are connected to each previous neuron, performs matrix-vector multiplication
+    x = layers.Dropout(0.3)(x) #Helps to prevent overfitting
 
-    x = layers.GlobalAveragePooling3D()(x)
-    x = layers.Dense(units=512, activation="relu")(x)
-    x = layers.Dropout(0.3)(x)
-
-    outputs = layers.Dense(units=1, activation="sigmoid")(x)
+    outputs = layers.Dense(units=1, activation="sigmoid")(x) #defining final neuron for classification
 
     # Define the model.
     model = keras.Model(inputs, outputs, name="3dcnn")
     return model
 
-#Read in .mat raw data file
-rawMatFile = loadmat(pathlib.Path(__file__).parent / 'P39-W2-S4.mat') 
-P39W2S4 = rawMatFile['rf1']
-
 #Set up model and load weights
 model = get_model(width=1651, height=205, depth=2)
 model.load_weights(pathlib.Path(__file__).parent / "3d_image_classification.h5")
 
-#process raw data to make predictions one
-processed = preprocessData(P39W2S4)
+def predictfile(filename):
+    #Read in .mat raw data file
+    print(pathlib.Path(__file__).parent.parent/"GUI"/"uploads"/filename)
+    rawMatFile = loadmat(pathlib.Path(__file__).parent.parent/"GUI"/"uploads"/filename) 
+    processfile = rawMatFile['rf1']
+    #process raw data to make predictions one
+    processed = preprocessData(processfile)
+    #predict labeles for processed data
+    predictions = predict(processed)
+    #format output
+    output = formatOutput(processed,predictions)
+    return output
 
-#predict labeles for processed data
-predictions = predict(processed)
-
-#format output
-output = formatOutput(processed,predictions)
-
-print(output[0])
-print(output[1])
-print(output[-1])

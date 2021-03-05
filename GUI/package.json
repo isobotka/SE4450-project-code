@@ -15,6 +15,7 @@
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
     "formidable": "^1.2.2",
-    "mat-file-upload": "^11.1.2"
+    "mat-file-upload": "^11.1.2",
+    "request": "^2.88.2"
   }
 }

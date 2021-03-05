@@ -1,3 +1,7 @@
+const { response } = require("express");
+let pulledData;
+var globalfilename='P39-W2-S4.mat';
+
 function uploadData() {
 	var fileUpload = document.getElementById("uploadedFile");
   
@@ -20,9 +24,7 @@ function uploadData() {
 	  .then((data) => {
 		alert(
 		  "File is uploaded successfully and is saved under " +
-			data.path +
-			", python result: " +
-			data.result
+			data.path 
 		);
   
 		console.log(data.path);

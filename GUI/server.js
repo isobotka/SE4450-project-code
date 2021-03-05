@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const { spawn } = require("child_process"); // for calling python script which generates a result
 
 const express = require("express");
+const request = require('request');
 const app = express();
 
 const users = [
@@ -85,6 +86,20 @@ app.post("/logout", function (req, res) {
     );
 });
 
+app.get('/getml', function(req, res) {
+    var fname=req.query.filenom
+    console.log("The id is"+fname)
+    console.log("The filename being sent to flask is"+fname)
+    var requesturl='http://127.0.0.1:5000/flask/'+fname
+    console.log("The request url is "+requesturl)
+    request(requesturl, function (error, response, body) {
+        console.error('error:', error); // Print the error
+        console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        console.log('body:', body); // Print the data received
+        res.send(body); //Display the response on the website
+      });      
+});
+
 app.post("/upload", function (req, res) {
     let uploadedFile;
     let uploadPath;
@@ -104,34 +119,16 @@ app.post("/upload", function (req, res) {
         if (err) {
             return res.status(500).send(err);
         }
-
-        var pythonResult;
-        // spawn new child process to call the python script
-        const python = spawn(
-            // path to python.exe
-            "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python36_64\\python",
-            ["script.py"]
-        );
-        // collect data from script
-        python.stdout.on("data", function (data) {
-            console.log("Pipe data from python script ..." + data);
-            pythonResult = data.toString();
-
-            res.writeHead(200, {
-                "Content-Type": "application/json",
-            });
-            res.end(
-                JSON.stringify({
-                    status: "success",
-                    path: uploadPath,
-                    result: pythonResult,
-                })
-            );
-        });
+          res.writeHead(200, {
+            "Content-Type": "application/json",
+          });
+          res.end(
+            JSON.stringify({
+              status: "success",
+              path: uploadPath
+            })
+          );
         // in close event we are sure that stream from child process is closed
-        python.on("close", (code) => {
-            console.log(`child process close all stdio with code ${code}`);
-        });
     });
 });
 
