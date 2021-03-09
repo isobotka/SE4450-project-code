@@ -6,6 +6,7 @@ import random as rand
 import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers
+import os
 import pathlib
 import json
 
@@ -107,5 +108,6 @@ def predictfile(filename):
     predictions = predict(processed)
     #format output
     output = formatOutput(processed,predictions)
+    os.remove(pathlib.Path(__file__).parent.parent/"GUI"/"uploads"/filename)
     return output
 

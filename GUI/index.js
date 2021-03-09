@@ -1,4 +1,4 @@
-const { response } = require("express");
+// const { response } = require("express");
 let pulledData;
 var globalfilename = 'P39-W2-S4.mat';
 var globalframes;
@@ -62,6 +62,11 @@ function getml() {
 	var progressBar = document.getElementById("progressBar");
 
 	if (progressBar) progressBar.style.display = "block";
+	var existingt=document.getElementById("results")
+	if(existingt)
+   {
+	existingt.remove();
+   }
 
 	fetch("http://localhost:8080/getml?" + new URLSearchParams({
 		filenom: globalfilename,
