@@ -1,7 +1,10 @@
+ 
+//const request= require("request");
 // const { response } = require("express");
 let pulledData;
 var globalfilename = 'P39-W2-S4.mat';
 var globalframes;
+
 function uploadData() {
 	var fileUpload = document.getElementById("uploadedFile");
 
@@ -94,7 +97,106 @@ function getml() {
 
 function getimages() {
 	alert("fetching images")
+	console.log(globalframes);
+	var table=document.getElementById("resulttable")
+	var b2hide=document.getElementById("viewimage")
+	table.style.display="none";
+	b2hide.style.display="none";
+	var b2show=document.getElementById("hideimage")
+	var imagediv=document.getElementById("imagetable");
+	imagediv.style.display="block";
+	b2show.style.display="block";
+	//Make Figure 1
+	var figure1=document.createElement("figure");
+	figure1.id="figure1";
+	figure1.style="text-align:center;"
+	var figure1caption=document.createElement("figcaption");
+	figure1caption.innerHTML="Top Pair 1: Frames 17 and 22";
+	var frame11=document.createElement("img");
+	frame11.src="./P39-W2-S4_Bmode/I17.jpg";
+	frame11.style="width:300px"
+	frame11.style="height:300px"
+	var frame12=document.createElement("img");
+    frame12.src="./P39-W2-S4_Bmode/I22.jpg";
+	frame12.style="width:300px"
+	frame12.style="height:300px"
+	var strain1722=document.createElement("img");
+    strain1722.src="./P39-W2-S4_Bmode/strain1722.png";
+	strain1722.style="width:300px"
+	strain1722.style="height:300px"
+	figure1.appendChild(strain1722)
+	figure1.appendChild(frame11);
+	figure1.appendChild(frame12);
+	figure1.appendChild(figure1caption);
+	imagediv.appendChild(figure1);
+	//Make Figure 2
+	var figure2=document.createElement("figure");
+	figure2.id="figure2";
+	figure2.style="text-align:center;"
+	var figure2caption=document.createElement("figcaption");
+	figure2caption.innerHTML="Top Pair 2: Frames 13 and 22";
+	var frame21=document.createElement("img");
+	frame21.src="./P39-W2-S4_Bmode/I13.jpg";
+	frame21.style="width:300px"
+	frame21.style="height:300px"
+	var frame22=document.createElement("img");
+    frame22.src="./P39-W2-S4_Bmode/I22.jpg";
+	frame22.style="width:300px"
+	frame22.style="height:300px"
+	var strain1322=document.createElement("img");
+    strain1322.src="./P39-W2-S4_Bmode/strain1322.png";
+	strain1322.style="width:300px"
+	strain1322.style="height:300px"
+	figure2.appendChild(strain1322)
+	figure2.appendChild(frame21);
+	figure2.appendChild(frame22);
+	figure2.appendChild(figure2caption);
+	imagediv.appendChild(figure2);
+	//Make Figure 3
+	var figure3=document.createElement("figure");
+	figure3.id="figure3";
+	figure3.style="text-align:center;"
+	var figure3caption=document.createElement("figcaption");
+	figure3caption.innerHTML="Top Pair 3: Frames 15 and 23";
+	var frame31=document.createElement("img");
+	frame31.src="./P39-W2-S4_Bmode/I15.jpg";
+	frame31.style="width:300px"
+	frame31.style="height:300px"
+	var frame32=document.createElement("img");
+    frame32.src="./P39-W2-S4_Bmode/I23.jpg";
+	frame32.style="width:300px"
+	frame32.style="height:300px"
+	var strain1523=document.createElement("img");
+    strain1523.src="./P39-W2-S4_Bmode/strain1523.png";
+	strain1523.style="width:300px"
+	strain1523.style="height:300px"
+	figure3.appendChild(strain1523)
+	figure3.appendChild(frame31);
+	figure3.appendChild(frame32);
+	figure3.appendChild(figure3caption);
+	imagediv.appendChild(figure3);
+	
+     
 	// \Preprocessing\P39-W2-S4_Bmode	// relative path for images
+}
+
+function getbacktable()
+{
+	var b2show=document.getElementById("hideimage")
+	var imagediv=document.getElementById("imagetable");
+	imagediv.style.display="none";
+	b2show.style.display="none";
+	var table=document.getElementById("resulttable")
+	var b2hide=document.getElementById("viewimage")
+	table.style.display="block";
+	b2hide.style.display="block";
+	var figure1=document.getElementById("figure1")
+	var figure2=document.getElementById("figure2")
+	var figure3=document.getElementById("figure3")
+	figure1.remove()
+	figure2.remove()
+	figure3.remove()
+	
 }
 
 function setTable(frames) {
@@ -169,32 +271,28 @@ function resettable(data) {
 	}
 }
 
-window.onload = function () {
+window.onload = function() {
 	fetch("http://localhost:8080/getUser", {
-		method: "POST",
+	  method: "POST",
 	})
-		.then((response) => response.json())
-		.then((data) => {
-			var loginId = document.getElementById("loginId");
+	  .then((response) => response.json())
+	  .then((data) => {
+		var loginId = document.getElementById("loginId");
 
-			if (data && data.loginId) {
-				if (loginId) loginId.innerHTML = data.loginId;
-			} else window.location = "http://localhost:8080";
-		})
-		.catch((error) => {
-			alert("ERROR: " + error);
-			console.error(error);
-		});
+		if (data && data.loginId) {
+		  if (loginId) loginId.innerHTML = data.loginId;
+		  var b2show=document.getElementById("hideimage")
+	        var imagediv=document.getElementById("imagetable");
+	        imagediv.style.display="none";
+	        b2show.style.display="none";
+		} else window.location = "http://localhost:8080";
+	  })
+	  .catch((error) => {
+		alert("ERROR: " + error);
+		console.error(error);
+	  });
 
-
-
-	var output = [
-		[2, 8, 0.9],
-		[3, 10, 0.84],
-		[3, 15, 0.8],
-		[4, 15, 0.73],
-		[6, 21, 0.66],
-	];
+	var output = [[2,8,0.9],[3,10,0.84],[3,15,0.8],[4,15,0.73],[6,21,0.66]];
 
 	//Rank 1
 	document.getElementById("r1f1").innerHTML = output[0][0];
@@ -224,5 +322,5 @@ window.onload = function () {
 
 // JQuery to display the table
 $(document).ready(function () {
-	$("#results").DataTable();
-});
+    $("#results").DataTable();
+  });

@@ -68,10 +68,14 @@
       <button id="testButton" onclick="getml()" class="btn-primary">
         Run Test
       </button>
-      <button id="resultsButton" onclick="getimages()" class="btn-primary">
-        See Top Frame Images
+      <button id="viewimage" onclick="getimages()" class="btn-primary">
+        View Top Frame Images
+      </button>
+      <button id="hideimage" onclick="getbacktable()" class="btn-primary" style.display="none">
+        Hide Top Frame Images
       </button>
     </div>
+    <div style="height: 800px;" style="width: 800px;" id="imagetable" style.display="none"></div>
     <p id="resulttable"></p>
     </div>
     <div id="progress" class='center'>
