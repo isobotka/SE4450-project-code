@@ -92,6 +92,10 @@ function getml() {
 	});*/
 }
 
+function getimages() {
+	alert("fetching images")
+}
+
 function setTable(frames) {
 	//console.log(frames);
 	//console.log(globalframes);
