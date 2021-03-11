@@ -94,6 +94,7 @@ function getml() {
 
 function getimages() {
 	alert("fetching images")
+	// \Preprocessing\P39-W2-S4_Bmode	// relative path for images
 }
 
 function setTable(frames) {
