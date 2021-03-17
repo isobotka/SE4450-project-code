@@ -335,15 +335,15 @@ $(document).ready(function () {
         maxWidth: 1000,
         maxHeight: 1000,
         width: 900,
-        height: 550,
+        height: 650,
         resizable: true,
         modal: true,
         open: function (event, ui) {
           var imgPath = $(this).data("imgPath");
-          $("#image").attr("src", imgPath).width("800px").height("400px");
+          $("#image").attr("src", imgPath).width("800px").height("500px");
 
           $("#image").attr("originalWidth", 800);
-          $("#image").attr("originalHeight", 400);
+          $("#image").attr("originalHeight", 500);
 
           $("button.ui-dialog-titlebar-close").hide();
         },
