@@ -88,26 +88,25 @@ n_interval = 5;
 n_frames = size(rf1,3);
 CreateAllDeformationData(name,n_interval,n_frames,coeffs,Bndrs,dims)
 %% Generating Specific Deformation Data
-ii = 1;
-jj = 6;
+ii = 13;
+jj = 22;
 maxA = 0.003;
-
 maxL = 0.0002;
 maxAL = {maxA , maxL};
-% IRF1 = -30;  %1  DON't CHANGE % Maximum allowed disparity in axial D
-% IRF2 = 0;    %2  DON't CHANGE
-% IA1 = -1;    %3  DON't CHANGE % Maximum allowed disparity in lateral D
-% IA2 = 1;     %4  DON't CHANGE
-% midA = 100;  %5  MAY CHANGE
-% alfa = 5;    %6  DON't CHANGE % Axial regularization
-% beta = 20;   %7  DON't CHANGE % Lateral regularization
-% gamma = 0.05;%8  DON't CHANGE % Lateral regularization
-% a_t = 0.63;  %9  DON't CHANGE % Compensate for attenuation
-% T = 0.01;    %10 DON't CHANGE % Threshold for IRLS
-% fs = 20;     %11 MAY CHANGE   % Ultrasound sampling freq. in MHz 
-% f0 = 10;     %12 MAY CHANGE   % Ultrasound center freq. in MHz   
-% smth = 5;    %13 DON't CHANGE % Degree of smoothness
-% coeffs = {IRF1,IRF2,IA1,IA2,midA,alfa,beta,gamma,a_t,T,fs,f0,smth};
+IRF1 = -30;  %1  DON't CHANGE % Maximum allowed disparity in axial D
+IRF2 = 0;    %2  DON't CHANGE
+IA1 = -1;    %3  DON't CHANGE % Maximum allowed disparity in lateral D
+IA2 = 1;     %4  DON't CHANGE
+midA = 100;  %5  MAY CHANGE
+alfa = 5;    %6  DON't CHANGE % Axial regularization
+beta = 20;   %7  DON't CHANGE % Lateral regularization
+gamma = 0.05;%8  DON't CHANGE % Lateral regularization
+a_t = 0.63;  %9  DON't CHANGE % Compensate for attenuation
+T = 0.01;    %10 DON't CHANGE % Threshold for IRLS
+fs = 20;     %11 MAY CHANGE   % Ultrasound sampling freq. in MHz 
+f0 = 10;     %12 MAY CHANGE   % Ultrasound center freq. in MHz   
+smth = 5;    %13 DON't CHANGE % Degree of smoothness
+coeffs = {IRF1,IRF2,IA1,IA2,midA,alfa,beta,gamma,a_t,T,fs,f0,smth};
 [Axial,Lateral,strainA,strainL] = RedoDef(name,ii,jj,maxAL,coeffs,Bndrs,dims);
 %% Downsampling Deformation Data
 lelems = 220;       %Number of elements in length

@@ -8,7 +8,6 @@ def index(filename):
     import Predictor
     output=Predictor.predictfile(filename)
     print(output)
-    import matlab.engine
     return jsonify({'output': output})
 
 if __name__ == "__main__":

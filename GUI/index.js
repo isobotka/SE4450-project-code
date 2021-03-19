@@ -1,7 +1,8 @@
 //const request= require("request");
 // const { response } = require("express");
 let pulledData;
-var globalfilename = "P39-W2-S4.mat";
+var globalfilename = " ";
+var globefnom= " ";
 var globalframes;
 
 function uploadData() {
@@ -28,6 +29,9 @@ function uploadData() {
 
       globalfilename = files[0].name;
       console.log("The file name is " + globalfilename);
+      globefnom= globalfilename.replace(".mat", " ");
+      globefnom=globefnom.trim();
+      console.log(globefnom);
       console.log(data.path);
     })
     .catch((error) => {
@@ -246,7 +250,8 @@ $(document).ready(function () {
   // Bind the click event to the 'viewimage' button
   $("#viewimage").click(function getimages() {
     alert("fetching images");
-    // console.log(globalframes);
+    console.log(globalframes);
+    console.log(globefnom);
     var table = document.getElementById("resulttable");
     var b2hide = document.getElementById("viewimage");
     table.style.display = "none";
@@ -260,45 +265,58 @@ $(document).ready(function () {
     figure1.id = "figure1";
     figure1.style = "text-align:center;";
     var figure1caption = document.createElement("figcaption");
-    figure1caption.innerHTML = "Top Pair 1: Frames 17 and 22";
+    var frame11val=globalframes.output[0].frame1
+    console.log(frame11val);
+    var frame12val=globalframes.output[0].frame2
+    console.log(frame12val);
+    strainname1=String(frame11val).concat(String(frame12val));
+    console.log(strainname1);
+    figure1caption.innerHTML = "Top Pair 1: Frames "+frame11val+" and "+frame12val;
     var frame11 = document.createElement("img");
-    frame11.src = "./P39-W2-S4_Bmode/I17.jpg";
+    frame11.src = "./"+globefnom+"/I"+frame11val+".jpg"
     frame11.style = "width:300px";
     frame11.style = "height:300px";
     var frame12 = document.createElement("img");
-    frame12.src = "./P39-W2-S4_Bmode/I22.jpg";
+    frame12.src = "./"+globefnom+"/I"+frame12val+".jpg"
     frame12.style = "width:300px";
     frame12.style = "height:300px";
-
-    var strain1722 = document.createElement("img");
-    strain1722.id = "strain1722";
-    strain1722.src = "./P39-W2-S4_Bmode/strain1722.png";
-    strain1722.style = "width:300px";
-    strain1722.style = "height:300px";
-    figure1.appendChild(strain1722);
+    var strain1 = document.createElement("img");
+    strain1.id = strainname1
+    strain1.src = "./"+globefnom+"/"+strainname1+".png"
+    strain1.style = "width:300px";
+    strain1.style = "height:300px";
+    figure1.appendChild(strain1);
     figure1.appendChild(frame11);
     figure1.appendChild(frame12);
     figure1.appendChild(figure1caption);
     imagediv.appendChild(figure1);
+    console.log(globalframes);
+
     //Make Figure 2
     var figure2 = document.createElement("figure");
     figure2.id = "figure2";
     figure2.style = "text-align:center;";
     var figure2caption = document.createElement("figcaption");
-    figure2caption.innerHTML = "Top Pair 2: Frames 13 and 22";
+    var frame21val=globalframes.output[1].frame1
+    console.log(frame21val);
+    var frame22val=globalframes.output[1].frame2
+    console.log(frame22val);
+    strainname2=String(frame21val).concat(String(frame22val));
+    console.log(strainname2);
+    figure2caption.innerHTML = "Top Pair 2: Frames "+frame21val+" and "+frame22val;
     var frame21 = document.createElement("img");
-    frame21.src = "./P39-W2-S4_Bmode/I13.jpg";
+    frame21.src = "./"+globefnom+"/I"+frame21val+".jpg"
     frame21.style = "width:300px";
     frame21.style = "height:300px";
     var frame22 = document.createElement("img");
-    frame22.src = "./P39-W2-S4_Bmode/I22.jpg";
+    frame22.src =  "./"+globefnom+"/I"+frame22val+".jpg"
     frame22.style = "width:300px";
     frame22.style = "height:300px";
-    var strain1322 = document.createElement("img");
-    strain1322.src = "./P39-W2-S4_Bmode/strain1322.png";
-    strain1322.style = "width:300px";
-    strain1322.style = "height:300px";
-    figure2.appendChild(strain1322);
+    var strain2 = document.createElement("img");
+    strain2.src = "./"+globefnom+"/"+strainname2+".png"
+    strain2.style = "width:300px";
+    strain2.style = "height:300px";
+    figure2.appendChild(strain2);
     figure2.appendChild(frame21);
     figure2.appendChild(frame22);
     figure2.appendChild(figure2caption);
@@ -308,20 +326,26 @@ $(document).ready(function () {
     figure3.id = "figure3";
     figure3.style = "text-align:center;";
     var figure3caption = document.createElement("figcaption");
-    figure3caption.innerHTML = "Top Pair 3: Frames 15 and 23";
+    var frame31val=globalframes.output[2].frame1
+    console.log(frame31val);
+    var frame32val=globalframes.output[2].frame2
+    console.log(frame32val);
+    strainname3=String(frame31val).concat(String(frame32val));
+    console.log(strainname3);
+    figure3caption.innerHTML = "Top Pair 3: Frames "+frame31val+" and "+frame32val;
     var frame31 = document.createElement("img");
-    frame31.src = "./P39-W2-S4_Bmode/I15.jpg";
+    frame31.src = "./"+globefnom+"/I"+frame31val+".jpg"
     frame31.style = "width:300px";
     frame31.style = "height:300px";
     var frame32 = document.createElement("img");
-    frame32.src = "./P39-W2-S4_Bmode/I23.jpg";
+    frame32.src = "./"+globefnom+"/I"+frame32val+".jpg"
     frame32.style = "width:300px";
     frame32.style = "height:300px";
-    var strain1523 = document.createElement("img");
-    strain1523.src = "./P39-W2-S4_Bmode/strain1523.png";
-    strain1523.style = "width:300px";
-    strain1523.style = "height:300px";
-    figure3.appendChild(strain1523);
+    var strain3 = document.createElement("img");
+    strain3.src = "./"+globefnom+"/"+strainname3+".png"
+    strain3.style = "width:300px";
+    strain3.style = "height:300px";
+    figure3.appendChild(strain3);
     figure3.appendChild(frame31);
     figure3.appendChild(frame32);
     figure3.appendChild(figure3caption);
