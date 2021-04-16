@@ -5,6 +5,7 @@ var globalfilename = " ";
 var globefnom = " ";
 var globalframes;
 
+// when user clicks "Upload File" button
 function uploadData() {
   var fileUpload = document.getElementById("uploadedFile");
 

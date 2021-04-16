@@ -30,11 +30,12 @@ app.get("/ping", function (req, res) {
     res.send("pong");
 });
 
-// default GET request redirects to /login.html
+// default GET request
 app.get("/", function (req, res) {
+    // set page to /login.html
     var page = "/login.html";
 
-    // if there is a current login, redirect to index.html
+    // if there is a current login, set page to index.html
     if (currentLoginId) {
         console.log("loginId", currentLoginId);
         page = "/index.html";
@@ -115,7 +116,7 @@ app.get('/getml', function (req, res) {
     });
 });
 
-// upload file POST request
+// upload file POST request called when user clicks "Upload File" in index.html with a file selected
 app.post("/upload", function (req, res) {
     let uploadedFile;
     let uploadPath;
