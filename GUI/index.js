@@ -2,7 +2,7 @@
 // const { response } = require("express");
 let pulledData;
 var globalfilename = " ";
-var globefnom= " ";
+var globefnom = " ";
 var globalframes;
 
 function uploadData() {
@@ -23,14 +23,15 @@ function uploadData() {
     method: "POST",
     body: formData,
   })
+    // return the promise resulting from parsing the body text of the response stream as JSON
     .then((response) => response.json())
     .then((data) => {
       alert("File is uploaded successfully and is saved under " + data.path);
 
       globalfilename = files[0].name;
       console.log("The file name is " + globalfilename);
-      globefnom= globalfilename.replace(".mat", " ");
-      globefnom=globefnom.trim();
+      globefnom = globalfilename.replace(".mat", " ");
+      globefnom = globefnom.trim();
       console.log(globefnom);
       console.log(data.path);
     })
@@ -44,10 +45,12 @@ function about() {
   window.location = "about.html";
 }
 
+// logout function
 function logout() {
   fetch("http://localhost:8080/logout", {
     method: "POST",
   })
+    // return the promise resulting from parsing the body text of the response stream as JSON
     .then((response) => response.json())
     .then((data) => {
       if (data.status == "success") window.location = "http://localhost:8080";
@@ -60,6 +63,7 @@ function logout() {
     });
 }
 
+// get results of machine learning to display optimal pairs
 function getml() {
   var progressBar = document.getElementById("progressBar");
 
@@ -71,9 +75,9 @@ function getml() {
 
   fetch(
     "http://localhost:8080/getml?" +
-      new URLSearchParams({
-        filenom: globalfilename,
-      }),
+    new URLSearchParams({
+      filenom: globalfilename,
+    }),
     {
       method: "GET",
     }
@@ -90,14 +94,6 @@ function getml() {
       if (progressBar) progressBar.style.display = "none";
       console.log("Fetch problem: " + err.message);
     });
-
-  /*.then((response) => response.json())
-	.then((data => puylledData=data))
-	.catch((error) => {
-	alert("ERROR: " + error);
-	console.error(error);
-	console.log(pulledData);
-	});*/
 }
 
 function getbacktable() {
@@ -118,8 +114,6 @@ function getbacktable() {
 }
 
 function setTable(frames) {
-  //console.log(frames);
-  //console.log(globalframes);
   $(document).ready(function () {
     var table = $("#results").DataTable({
       data: globalframes,
@@ -140,6 +134,7 @@ function setTable(frames) {
     }
   });
 }
+
 function resettable(data) {
   console.log(data.output);
   console.log(data.output[1].frame1);
@@ -188,10 +183,12 @@ function resettable(data) {
   }
 }
 
+// on window load, send POST request to get user name
 window.onload = function () {
   fetch("http://localhost:8080/getUser", {
     method: "POST",
   })
+    // return the promise resulting from parsing the body text of the response stream as JSON
     .then((response) => response.json())
     .then((data) => {
       var loginId = document.getElementById("loginId");
@@ -260,29 +257,29 @@ $(document).ready(function () {
     var imagediv = document.getElementById("imagetable");
     imagediv.style.display = "block";
     b2show.style.display = "inline";
-    //Make Figure 1
+    // Make Figure 1
     var figure1 = document.createElement("figure");
     figure1.id = "figure1";
     figure1.style = "text-align:center;";
     var figure1caption = document.createElement("figcaption");
-    var frame11val=globalframes.output[0].frame1
+    var frame11val = globalframes.output[0].frame1
     console.log(frame11val);
-    var frame12val=globalframes.output[0].frame2
+    var frame12val = globalframes.output[0].frame2
     console.log(frame12val);
-    strainname1=String(frame11val).concat(String(frame12val));
+    strainname1 = String(frame11val).concat(String(frame12val));
     console.log(strainname1);
-    figure1caption.innerHTML = "Top Pair 1: Frames "+frame11val+" and "+frame12val;
+    figure1caption.innerHTML = "Top Pair 1: Frames " + frame11val + " and " + frame12val;
     var frame11 = document.createElement("img");
-    frame11.src = "./"+globefnom+"/I"+frame11val+".jpg"
+    frame11.src = "./" + globefnom + "/I" + frame11val + ".jpg"
     frame11.style = "width:300px";
     frame11.style = "height:300px";
     var frame12 = document.createElement("img");
-    frame12.src = "./"+globefnom+"/I"+frame12val+".jpg"
+    frame12.src = "./" + globefnom + "/I" + frame12val + ".jpg"
     frame12.style = "width:300px";
     frame12.style = "height:300px";
     var strain1 = document.createElement("img");
     strain1.id = strainname1
-    strain1.src = "./"+globefnom+"/"+strainname1+".png"
+    strain1.src = "./" + globefnom + "/" + strainname1 + ".png"
     strain1.style = "width:300px";
     strain1.style = "height:300px";
     figure1.appendChild(strain1);
@@ -292,28 +289,28 @@ $(document).ready(function () {
     imagediv.appendChild(figure1);
     console.log(globalframes);
 
-    //Make Figure 2
+    // Make Figure 2
     var figure2 = document.createElement("figure");
     figure2.id = "figure2";
     figure2.style = "text-align:center;";
     var figure2caption = document.createElement("figcaption");
-    var frame21val=globalframes.output[1].frame1
+    var frame21val = globalframes.output[1].frame1
     console.log(frame21val);
-    var frame22val=globalframes.output[1].frame2
+    var frame22val = globalframes.output[1].frame2
     console.log(frame22val);
-    strainname2=String(frame21val).concat(String(frame22val));
+    strainname2 = String(frame21val).concat(String(frame22val));
     console.log(strainname2);
-    figure2caption.innerHTML = "Top Pair 2: Frames "+frame21val+" and "+frame22val;
+    figure2caption.innerHTML = "Top Pair 2: Frames " + frame21val + " and " + frame22val;
     var frame21 = document.createElement("img");
-    frame21.src = "./"+globefnom+"/I"+frame21val+".jpg"
+    frame21.src = "./" + globefnom + "/I" + frame21val + ".jpg"
     frame21.style = "width:300px";
     frame21.style = "height:300px";
     var frame22 = document.createElement("img");
-    frame22.src =  "./"+globefnom+"/I"+frame22val+".jpg"
+    frame22.src = "./" + globefnom + "/I" + frame22val + ".jpg"
     frame22.style = "width:300px";
     frame22.style = "height:300px";
     var strain2 = document.createElement("img");
-    strain2.src = "./"+globefnom+"/"+strainname2+".png"
+    strain2.src = "./" + globefnom + "/" + strainname2 + ".png"
     strain2.style = "width:300px";
     strain2.style = "height:300px";
     figure2.appendChild(strain2);
@@ -321,28 +318,28 @@ $(document).ready(function () {
     figure2.appendChild(frame22);
     figure2.appendChild(figure2caption);
     imagediv.appendChild(figure2);
-    //Make Figure 3
+    // Make Figure 3
     var figure3 = document.createElement("figure");
     figure3.id = "figure3";
     figure3.style = "text-align:center;";
     var figure3caption = document.createElement("figcaption");
-    var frame31val=globalframes.output[2].frame1
+    var frame31val = globalframes.output[2].frame1
     console.log(frame31val);
-    var frame32val=globalframes.output[2].frame2
+    var frame32val = globalframes.output[2].frame2
     console.log(frame32val);
-    strainname3=String(frame31val).concat(String(frame32val));
+    strainname3 = String(frame31val).concat(String(frame32val));
     console.log(strainname3);
-    figure3caption.innerHTML = "Top Pair 3: Frames "+frame31val+" and "+frame32val;
+    figure3caption.innerHTML = "Top Pair 3: Frames " + frame31val + " and " + frame32val;
     var frame31 = document.createElement("img");
-    frame31.src = "./"+globefnom+"/I"+frame31val+".jpg"
+    frame31.src = "./" + globefnom + "/I" + frame31val + ".jpg"
     frame31.style = "width:300px";
     frame31.style = "height:300px";
     var frame32 = document.createElement("img");
-    frame32.src = "./"+globefnom+"/I"+frame32val+".jpg"
+    frame32.src = "./" + globefnom + "/I" + frame32val + ".jpg"
     frame32.style = "width:300px";
     frame32.style = "height:300px";
     var strain3 = document.createElement("img");
-    strain3.src = "./"+globefnom+"/"+strainname3+".png"
+    strain3.src = "./" + globefnom + "/" + strainname3 + ".png"
     strain3.style = "width:300px";
     strain3.style = "height:300px";
     figure3.appendChild(strain3);
@@ -404,12 +401,9 @@ $(document).ready(function () {
         image$.width(imageWidth).height(imageHeight);
       });
 
-      //   e.preventDefault();
       $("#dialog")
         .data("imgPath", $(this).attr("src")) // The important part .data() method
         .dialog("open");
     });
-
-    // \Preprocessing\P39-W2-S4_Bmode	// relative path for images
   });
 });
