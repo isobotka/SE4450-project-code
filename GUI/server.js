@@ -104,6 +104,7 @@ app.get('/getml', function (req, res) {
     var fname = req.query.filenom
     console.log("The id is" + fname)
     console.log("The filename being sent to flask is" + fname)
+    //Sends it to local console. Hard coded for this project but future will change this to the server link
     var requesturl = 'http://127.0.0.1:5000/flask/' + fname
     console.log("The request url is " + requesturl)
     request(requesturl, function (error, response, body) {

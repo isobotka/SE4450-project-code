@@ -72,10 +72,11 @@ function getml() {
   if (existingt) {
     existingt.remove();
   }
-
+   //Sends a request to first server (JS) server whhich sends request to python server
   fetch(
     "http://localhost:8080/getml?" +
     new URLSearchParams({
+      //Uploaded file name is saved as globalfilename
       filenom: globalfilename,
     }),
     {
@@ -87,6 +88,7 @@ function getml() {
     })
     .then(function (json) {
       if (progressBar) progressBar.style.display = "none";
+      //sAVE RESPONSE in global frames data
       globalframes = json;
       resettable(globalframes);
     })
@@ -139,6 +141,7 @@ function resettable(data) {
   console.log(data.output);
   console.log(data.output[1].frame1);
   console.log(data.output[1].percent);
+  //Creates the visual div to display table but also resets the old table
   var resultdiv = document.createElement("div");
   var newresultstable = document.createElement("table");
   newresultstable.id = "results";
@@ -152,6 +155,7 @@ function resettable(data) {
   let row = thead.insertRow();
   let th1 = document.createElement("th");
   th1.style = "width:30%";
+  //Makes the first row/ title head for each row
   let text1 = document.createTextNode("Rank");
   th1.appendChild(text1);
   row.appendChild(th1);
@@ -290,6 +294,7 @@ $(document).ready(function () {
     console.log(globalframes);
 
     // Make Figure 2
+    //Currently this section is hard coded to pull images based on their values from folders in GUI. If MATLAB engine worked, this would not be the case. All of these are just basic HTML DOM Events
     var figure2 = document.createElement("figure");
     figure2.id = "figure2";
     figure2.style = "text-align:center;";
